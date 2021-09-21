@@ -57,10 +57,6 @@
       <Project>{aa57519e-c529-4d0b-a002-50d6b9efcdca}</Project>
       <Name>Mediator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Order\Data.csproj">
-      <Project>{39D1E05E-5F76-4455-A993-1D3312F0CD73}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Stages\Stages.csproj">
       <Project>{4804DE19-3EBC-49EE-BE38-7C8BC10D46E1}</Project>
       <Name>Stages</Name>

@@ -47,9 +47,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Order\Data.csproj">
-      <Project>{39D1E05E-5F76-4455-A993-1D3312F0CD73}</Project>
-      <Name>Data</Name>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{75C87DDB-806F-4D0F-B76F-44F378331F09}</Project>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
