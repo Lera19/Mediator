@@ -21,7 +21,6 @@ namespace MediatorClient
             mediator.Notify("100", factory);
 
             Console.ReadKey();
-
         }
     }
 }
