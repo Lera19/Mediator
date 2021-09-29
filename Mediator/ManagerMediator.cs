@@ -17,7 +17,7 @@ namespace Mediator
         };
         private List<Factory> factories = new List<Factory>()
         {
-            new Factory(){Id = Guid.NewGuid().ToString(), Name="Factory 1", 
+            new Factory(){Id = Guid.NewGuid().ToString(), Name="Factory1", 
                 Yoghurt=new Yoghurt(){ NameYoghurt = "KLO", Price = 15, Description = "Good" }}
         };
 
@@ -30,9 +30,7 @@ namespace Mediator
                     && CheckingParameterYoghurt(factories.Find(c => c.Yoghurt.NameYoghurt == "KLO"), "with lactose") == false)
                     {
                         IProduction prod = new ProductionYoghurt();
-                        prod.MakingYoghurt();
-                        prod.Packages();
-                        prod.SendingToTheWarehouse();
+                        prod.Production();
 
                         FactoryColleague.SendByEmail("Order is ready");
                     }
