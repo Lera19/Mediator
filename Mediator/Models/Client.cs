@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Mediator.Models
+﻿namespace Mediator.Models
 {
     public class Client 
     {

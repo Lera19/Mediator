@@ -22,7 +22,7 @@ namespace Mediator
         };
 
 
-        public override void Notify(string msg, Colleague colleague)
+        public override void Notify(string msg)
         {
             
             ClientColleague.SendByEmail(msg);

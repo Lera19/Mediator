@@ -9,7 +9,7 @@
         }
         public virtual void SendByEmail(string msg)
         {
-            mediator.Notify(msg, this);
+            mediator.Notify(msg);
         }
     }
 }

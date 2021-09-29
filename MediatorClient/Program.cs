@@ -1,8 +1,6 @@
 ﻿using Mediator;
 using Mediator.Colleagues;
-using Mediator.Models;
 using System;
-using System.Threading;
 
 namespace MediatorClient
 {
@@ -18,7 +16,7 @@ namespace MediatorClient
             mediator.ClientColleague = client;
             mediator.FactoryColleague = factory;
 
-            mediator.Notify("100", factory);
+            mediator.Notify("100");
 
             Console.ReadKey();
         }
