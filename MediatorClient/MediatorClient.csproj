@@ -57,10 +57,6 @@
       <Project>{aa57519e-c529-4d0b-a002-50d6b9efcdca}</Project>
       <Name>Mediator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Stages\Stages.csproj">
-      <Project>{4804DE19-3EBC-49EE-BE38-7C8BC10D46E1}</Project>
-      <Name>Stages</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

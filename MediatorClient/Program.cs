@@ -1,7 +1,8 @@
 ﻿using Mediator;
-using Stages;
-using Stages.Manufacturing;
+using Mediator.Colleagues;
+using Mediator.Models;
 using System;
+using System.Threading;
 
 namespace MediatorClient
 {
@@ -10,20 +11,14 @@ namespace MediatorClient
         static void Main(string[] args)
         {
             ManagerMediator mediator = new ManagerMediator();
-            Colleague production = new ProductionColleague(mediator);
-            Colleague makingYoghurt = new MakingYoghurtColleague(mediator);
-            Colleague package = new PackageColleague(mediator);
-            Colleague transfer = new TransferColleague(mediator);
 
-            mediator.Production = production;
-            mediator.MakingYoghurt = makingYoghurt;
-            mediator.Package = package;
-            mediator.Transfer = transfer;
+            Colleague client = new ClientColleague(mediator);
+            Colleague factory = new FactoryColleague(mediator);
 
-            production.Send("Order production");
-            makingYoghurt.Send("Yoghurt done, ready for package");
-            package.Send("Ready for transfer");
-            transfer.Send("Ready order");
+            mediator.ClientColleague = client;
+            mediator.FactoryColleague = factory;
+
+            mediator.Notify("100", factory);
 
             Console.ReadKey();
 

@@ -42,15 +42,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Colleague.cs" />
+    <Compile Include="Colleagues\ClientColleague.cs" />
+    <Compile Include="Colleagues\FactoryColleague.cs" />
     <Compile Include="ManagerMediator.cs" />
     <Compile Include="Mediator.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Factory.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Production\IProduction.cs" />
+    <Compile Include="Models\Yoghurt.cs" />
+    <Compile Include="Production\ProductionYoghurt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{75C87DDB-806F-4D0F-B76F-44F378331F09}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

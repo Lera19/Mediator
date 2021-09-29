@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Mediator
+﻿namespace Mediator
 {
     public abstract class Colleague
     {
@@ -9,17 +7,9 @@ namespace Mediator
         {
             this.mediator = mediator;
         }
-        public virtual void Send(string msg)
+        public virtual void SendByEmail(string msg)
         {
-            mediator.Send(msg, this);
+            mediator.Notify(msg, this);
         }
-
-        public abstract void Notify(string msg);
-
-        public virtual void NotifyCustomerAboutDelivery()
-        {
-            Console.WriteLine("it is impossible to deliver the order ");
-        }
-
     }
 }

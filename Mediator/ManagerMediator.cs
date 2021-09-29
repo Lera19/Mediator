@@ -1,76 +1,62 @@
-﻿using Models;
+﻿using Mediator.Models;
+using Mediator.Production;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Mediator
 {
     public class ManagerMediator : Mediator
     {
-        public Colleague Production { get; set; }
-        public Colleague MakingYoghurt { get; set; }
-        public Colleague Package { get; set; }
-        public Colleague Transfer { get; set; }
+        public Colleague ClientColleague { get; set; }
+        public Colleague FactoryColleague { get; set; }
 
-        public List<Order> orders = new List<Order>()
+        public List<Client> client = new List<Client>()
         {
-                new Order() {Id = Guid.NewGuid().ToString(), CountYoghurt = 100, Price = 2000 }
+            new Client(){ Id = Guid.NewGuid().ToString(), Name="Client1",
+                Order = new Order() { CountYoghurt = 100, Price = 2000 }}
         };
-        private List<Yoghurt> yoghurts = new List<Yoghurt>()
+        private List<Factory> factories = new List<Factory>()
         {
-                new Yoghurt(){ Id = Guid.NewGuid().ToString(), NameYoghurt = "KLO", Price = 15, Description = "Good" }
+            new Factory(){Id = Guid.NewGuid().ToString(), Name="Factory 1", 
+                Yoghurt=new Yoghurt(){ NameYoghurt = "KLO", Price = 15, Description = "Good" }}
         };
 
 
-        public bool ComparisonPriceForOrderSmaller(Order order, Yoghurt yoghurt)
+        public override void Notify(string msg, Colleague colleague)
         {
-
-            var result = yoghurt.Price * order.CountYoghurt <= order.Price;
-            return result;
-
-        }
-
-        public bool CheckingParameterYoghurt(Yoghurt yoghurt)
-        {
-            string parameter = "with lactose";
-            var result = yoghurt.Description.Contains(parameter);
-            return result;
-
-        }
-
-
-        public override void Send(string msg, Colleague colleague)
-        {
-            if (ComparisonPriceForOrderSmaller(orders.First(), yoghurts.First()))
-            {
-                if (CheckingParameterYoghurt(yoghurts.First()) == false)
-                {
-                    if (Production == colleague)
+            
+            ClientColleague.SendByEmail(msg);
+                if (ComparisonPriceForOrderSmaller(client.Find(c => c.Order.Price == 2000), factories.Find(c => c.Yoghurt.NameYoghurt == "KLO")) == true
+                    && CheckingParameterYoghurt(factories.Find(c => c.Yoghurt.NameYoghurt == "KLO"), "with lactose") == false)
                     {
-                        MakingYoghurt.Notify(msg);
+                        IProduction prod = new ProductionYoghurt();
+                        prod.MakingYoghurt();
+                        prod.Packages();
+                        prod.SendingToTheWarehouse();
+
+                        FactoryColleague.SendByEmail("Order is ready");
                     }
-                    else if (MakingYoghurt == colleague)
-                    {
-                        Package.Notify(msg);
-                    }
-                    else if (Package == colleague)
-                    {
-                        Transfer.Notify(msg);
-                    }
-                    else if (Transfer == colleague)
-                    {
-                        Production.Notify(msg);
-                    }
-                }
                 else
                 {
-                    Production.NotifyCustomerAboutDelivery();
+                    FactoryColleague.SendByEmail("Sorry we can't doing this order");
                 }
+                
             }
-            else
-            {
-                Production.NotifyCustomerAboutDelivery();
-            }
+
+
+        public bool ComparisonPriceForOrderSmaller(Client client , Factory factory)
+        {
+            var result = factory.Yoghurt.Price * client.Order.CountYoghurt <= client.Order.Price;
+            return result;
+
         }
+
+        public bool CheckingParameterYoghurt(Factory factory, string parameter)
+        {
+            var result = factory.Yoghurt.Description.Contains(parameter);
+            return result;
+
+        }
+
     }
 }
